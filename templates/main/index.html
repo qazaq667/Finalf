@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Pet shop</title>
+</head>
+
+<body>
+
+<header class="header" style="background: white">
+            <a href="{% url 'main:home' %}"><img src="{% static 'images/old_logo.png' %}" class="logo" style="float: left; width: 70px; height: 70px"></a>
+            <ul class="nav-links" style="color: black" >
+                <li style="float: right"><a href="{% url 'main:register' %}" class="btn-header">{{ User.name }} Account</a></li>
+                <li style="float: right">
+                        <div class="cart">
+                            {% with total_items=cart|length %}
+                            {% if cart|length > 0 %}
+                            Cart:
+                            <a href="{% url 'cart:cart_detail' %}" style="color: black">
+                                {{ total_items }} штук ,${{ cart.get_total_price }}
+                            </a>
+                            {% else %}
+                            Cart empty
+                            {% endif %}
+                            {% endwith %}
+                        </div>
+                    </li>
+                <li style="float: right"><a href="{% url 'main:contact' %}" style="color: black">Contacts</a></li>
+                <li style="float: right"><a href="{% url 'main:product_list' %}" style="color: black">Pets</a></li>
+                <li style="float: right"><a href="{% url 'main:home' %}" style="color: black">Home</a></li>
+                </ul>
+    </header>
+
+<div class="container-fluid bg-2 text-center">
+<div class="row" >
+
+  <div class="col-sm-4">
+
+    <div class="coupon">
+     <div class="container1">
+       <h1>Free!</h1>
+     </div>
+     <img src="{% static 'images/fish1.png' %}" alt="Avatar" style="width:100%;">
+     <div class="container1" >
+       <a type="button"  href="{% url 'main:product_list' %}"><h1>Buy 1 Get Respect</h1> </a>
+       <p>Buy and get respect</p>
+     </div>
+     <div class="container1">
+       <p class="expire">Expires: June 03, 2022</p>
+     </div>
+   </div>
+  </div>
+  <div>
+    <div class="col-sm-4">
+
+      <div class="coupon">
+       <div class="container1">
+         <h1>Free!</h1>
+       </div>
+       <img src="{% static 'images/cat1.png' %}" alt="Avatar" style="width:90%;">
+       <div class="container1" >
+         <a type="button"  href="{% url 'main:product_list' %}"><h1>Buy and get free delivery</h1> </a>
+         <p>Buy and get free delivery</p>
+       </div>
+       <div class="container1">
+         <p class="expire">Expires: June 03, 2022</p>
+       </div>
+     </div>
+   </div>
+     <div class="col-sm-4">
+
+       <div class="coupon">
+        <div class="container1">
+          <h1>Free!</h1>
+        </div>
+        <img src="{% static 'images/bird2.png' %}" alt="Avatar" style="width:80%;">
+        <div class="container1" >
+          <a type="button"  href="{% url 'main:product_list' %}"><h1>Buy 1 Get 2</h1> </a>
+          <p>Only here you can buy 1 but get 2</p>
+        </div>
+        <div class="container1">
+          <p class="expire">Expires: June 03, 2022</p>
+        </div>
+      </div>
+    </div>
+
+</div>
+</div>
+</div>
+
+<div class="container-fluid bg-3 text-center">
+  <h1 class="margin">Pets</h1><br>
+  <div class="row">
+    <div class="col-sm-4">
+      <img class="image" src="{% static 'images/cat1.png' %}" class="img-responsive margin" style="width:100%" alt="Image">
+      <p>Animals (lat. Animalia) is a traditionally (since the time of Aristotle) ​​distinguished category of organisms, currently considered as a biological kingdom. Animals are the main object of study of zoology.
+    </div>
+    <div class="col-sm-4">
+      <img class="image" src="{% static 'images/fish1.png' %}" class="img-responsive margin" style="width:100%" alt="Image">
+        <p>Fish (lat. Pisces) is a paraphyletic group (according to the modern cladistic classification) of aquatic vertebrates. An extensive group of jawed mouths, which are characterized by gill breathing at all stages of the postembryonic development of the organism. </p>    </div>
+    <div class="col-sm-4">
+      <img class="image" src="{% static 'images/bird3.png' %}" class="img-responsive margin" style="width:100%" align="center" alt="Image">
+      <p>Birds (lat. Aves) are a group of warm-blooded egg-laying vertebrates, traditionally considered as a separate class. Well isolated from other groups of modern animals.</p>
+    </div>
+  </div>
+</div>
+
+
+    <div class="jumbotron">
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="item active">
+            <img src="{% static 'images/pes1.png' %}" alt="">
+            <div class="carousel-caption">
+            </div>
+          </div>
+          <div class="item">
+            <img src="{% static 'images/husky-section1.png' %}" alt="">
+            <div class="carousel-caption">
+            </div>
+          </div>
+          <div class="item">
+            <img src="{% static 'images/pes3.png' %}" alt="">
+            <div class="carousel-caption">
+            </div>
+          </div>
+        </div>
+        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+      </div>
+    </div>
+
+
+<div class="container-fluid bg-2 text-center">
+  <h1 class="margin">Who we are</h1>
+
+  <div class="row">
+          <div class="row">
+          <div class="col-xs-8 col-sm-6">
+          <img src="{% static 'images/pes2.png' %}" alt="">
+          </div>
+              <div class="col-xs-4 col-sm-6">
+              <h1>We are the best pet store. our animals undergo all medical examinations, they have vaccination passports. We have created all conditions for animals. You can be sure that your new friend is absolutely healthy and clean.</h1>
+          </div>
+          </div>
+  </div>
+
+</div>
+
+
+
+
+<div class="footer-basic">
+
+<footer>
+           <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+           <ul class="list-inline">
+               <li class="list-inline-item"><a class="fff" href="#">Home</a></li>
+               <li class="list-inline-item"><a class="fff" href="#">Services</a></li>
+               <li class="list-inline-item"><a class="fff" href="#">About</a></li>
+               <li class="list-inline-item"><a class="fff" href="#">Terms</a></li>
+               <li class="list-inline-item"><a class="fff" href="#">Privacy Policy</a></li>
+           </ul>
+           <p class="copyright">Zoo © <script>document.write(new Date().getFullYear());</script></p>
+       </footer>
+     </div>
+</body>
+
+</html>

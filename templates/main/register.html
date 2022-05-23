@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}" type="text/css">
+    <script src="{% static 'js/register.js' %}" defer></script>
+
+    <title>ACCOUNT</title>
+</head>
+<header class="header" style="background: white">
+        <div class="container">
+            <nav>
+                <a href="{% url 'main:home' %}"><img src="{% static 'images/old_logo.png' %}" class="logo" style="height: 100px; width: 100px; float: left"></a>
+                <ul class="nav-links" style="color: black">
+                    <li><a href="{% url 'main:home' %}" style="color: black">Home</a></li>
+                    <li><a href="{% url 'main:product_list' %}" style="color: black">Pets</a></li>
+                    <li><a href="{% url 'main:contact' %}" style="color: black">Contacts</a></li>
+                    <li>
+                        <div class="cart">
+                            {% with total_items=cart|length %}
+                            {% if cart|length > 0 %}
+                            В корзине:
+                            <a href="{% url 'cart:cart_detail' %}" style="color: black">
+                                {{ total_items }} штук ,${{ cart.get_total_price }}
+                            </a>
+                            {% else %}
+                            Корзинка пустая
+                            {% endif %}
+                            {% endwith %}
+                        </div>
+                    </li>
+                    <li><a href="{% url 'main:register' %}" class="btn-header">{{ User.name }} Accaunt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+<body>
+    <div class="register_body">
+        <article class="container-register">
+            <div class="block">
+                <section class="block__item block-item">
+                    <h2 class="block-item__title">У вас уже есть аакуант?</h2>
+                    <button class="block-item__btn signin-btn">Войти</button>
+                </section>
+                <section class="block__item block-item">
+                    <h2 class="block-item__title">У вас нет аккаунта?</h2>
+                    <button class="block-item__btn signup-btn">Зарегистрироваться</button>
+                </section>
+            </div>
+
+
+            <div class="form-box">
+                <form class="form form_signin" method="POST" action="{% url 'main:login' %}">
+                    <h3 class="form__title">Вход</h3>
+                    {% csrf_token %}
+                    <p>
+                        <input type="text" class="form__input" placeholder="Логин" name="username">
+                    </p>
+                    <p>
+                        <input type="password" class="form__input" placeholder="Пароль" name="password">
+                    </p>
+                    <p>
+                        <button type="submit" value="Submit" class="form__btn">Войти</button>
+                    </p>
+                    <p>
+                        <a href="#" class="form__forgot">Восстановить пароль</a>
+                    </p>
+                </form>
+                <!--  Другая форма ---------------------------------------------------------------------------------------------------------------------->
+                <form class="form form_signup" method="POST">
+                    <h3 class="form__title">Регистрация</h3>
+                    {% csrf_token %}
+                    <!--   чтобы форма работало  - csrf_token нужен-->
+
+                    <p>
+                        <input type="text" class="form__input" placeholder="Username" name="username">
+                    </p>
+                    <p>
+                        <input type="email" class="form__input" placeholder="Email" name="email">
+                    </p>
+                    <p>
+                        <input type="password" class="form__input" placeholder="Пароль" name="password">
+                    </p>
+                    <p>
+                        <input type="password" class="form__input" placeholder="Повторите пароль" name="password2">
+                    </p>
+                    <p>
+                        <button type="submit" value="Submit"
+                            class="form__btn form__btn__signup">Зарегистрироваться</button>
+                    </p>
+                    <span>{{error}}</span>
+                </form>
+            </div>
+        </article>
+    </div>
+</body>
+<style>
+    body {
+    background-image: linear-gradient(to left, black ,grey, white);
+    margin: 0;
+    padding: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    min-height: 100vh;
+
+    transition: 0.5s;
+}
+
+
+body.active {
+     background-image: linear-gradient(to right, black, grey , white);
+}
+</style>
+</html>

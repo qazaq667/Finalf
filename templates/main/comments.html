@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <title>Комменты</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body style="background-color:#4DB6AC;">
+    <nav class="navbar navbar-light" style="background-color:#FF0033;">
+        <a href="{% url 'main:home' %}" class='navbar-link btn-lg' 
+            style="background-color:#FFCC33;color:#000000;">На главную</a>
+        <a href="{% url 'main:comment' %}" class="navbar-brand navbar-link btn-lg"
+            style="background-color:#FFCC33;color:#000000;">Комменты</a>
+        <a href="{% url 'admin:index' %}" class='navbar-link btn-lg'
+            style="background-color:#FFCC33;color:#000000;">God mode</a>
+        <a href="{% url 'main:crud_upload' %}" class="navbar-link btn-lg"
+            style="background-color:#FFCC33;color:#000000;">Добавить комментарии</a>
+    </nav>
+    <br>
+    {% block content %}
+    <div class="card-columns">
+        {% for crud in shelf %}
+        <div class="card" style="width: 18rem;">
+            
+            <div class="card-body">
+                <h5 class="card-title">{{ crud.animal_name }}</h5>
+                <p class="card-text">{{ crud.comment }}</p>
+                <div class="card-footer bg-transparent border-dark">
+                    
+                    <center>
+                        <a href="update/{{crud.id}}" class="btn btn-warning" id='{{crud.id}}'>edit</a>
+                        <a href="delete/{{crud.id}}" class="btn btn-danger" id='{{crud.id}}'>delete</a>
+                    </center>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endblock %}
+</body>
+
+</html>
